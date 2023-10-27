@@ -15,6 +15,7 @@ gene_list = st.file_uploader("Upload a tab deliminated file of your selected gen
 gene_id_name = st.text_area("How you are aligning the files, by gene_id", value = "gene_id")
 downloadpath = st.text_area("The filename to download the gtf file", value = "download.gtf")
 
+gtf_data=None
 
 # Function to download GTF file from the selected URL
 def download_gtf_file(url):
