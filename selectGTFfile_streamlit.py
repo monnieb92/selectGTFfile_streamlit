@@ -57,29 +57,32 @@ if st.button("Download GTF File"):
 #Empty list 
 selected_genes = []
 
-gtf_lines = gtf_data.splitlines()
 github_file_url = 'https://raw.githubusercontent.com/monnieb92/selectGTFfile_streamlit/main/selectgenelist.txt'
 
-# Read gene IDs from the uploaded file
-if gene_list is not None:
-    gene_list_df = pd.read_csv(gene_list,sep="\t")
-    gene_id_list = gene_list_df[gene_id_name].tolist()
-else:
-    response = requests.get(github_file_url)
-    gene_list_df = pd.read_csv(StringIO(response.text),sep="\t")
-    gene_id_list = gene_list_df[gene_id_name].tolist()
-    
-    # Loop through the GTF data
-    for line in gtf_lines:
-        elements = line.split("\t")
-        if len(elements) < 9:
-            continue
-        attributes = elements[8]
-        if gene_id_name in attributes:
-            gene_id = attributes.split(gene_id_name)[1].split('";')[0].strip(' "')
-            if gene_id in gene_id_list:
-                selected_genes.append(line)
+# Split GTF data into lines if gtf_data is not None
+if gtf_data:
+    gtf_lines = gtf_data.splitlines()
+
+    # Read gene IDs from the uploaded file
+    if gene_list is not None:
+        gene_list_df = pd.read_csv(gene_list, sep="\t")
+        gene_id_list = gene_list_df[gene_id_name].tolist()
+    else:
+        response = requests.get(github_file_url)
+        gene_list_df = pd.read_csv(StringIO(response.text), sep="\t")
+        gene_id_list = gene_list_df[gene_id_name].tolist()
+    
+    # Loop through the GTF data
+    for line in gtf_lines:
+        elements = line.split("\t")
+        if len(elements) < 9:
+            continue
+        attributes = elements[8]
+        if gene_id_name in attributes:
+            gene_id = attributes.split(gene_id_name)[1].split('";')[0].strip(' "')
+            if gene_id in gene_id_list:
+                selected_genes.append(line)
 
 with open(downloadpath, "w") as new_gtf_file:
-    for entry in selected_genes:
-        new_gtf_file.write(entry)
+    for entry in selected_genes:
+        new_gtf_file.write(entry)
