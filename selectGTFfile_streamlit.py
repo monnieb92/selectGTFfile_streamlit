@@ -8,7 +8,8 @@ Created on Fri Oct 27 14:16:50 2023
 
 import streamlit as st 
 import requests
-import pandas as pd 
+import pandas as pd
+from io import StringIO
 
 gene_list = st.file_uploader("Upload a tab deliminated file of your selected gene list")
 gene_id_name = st.text_area("How you are aligning the files, by gene_id", value = "gene_id")
@@ -56,10 +57,15 @@ if st.button("Download GTF File"):
 selected_genes = []
 
 gtf_lines = gtf_data.splitlines()
+github_file_url = 'https://raw.githubusercontent.com/monnieb92/selectGTFfile_streamlit/main/selectgenelist.txt'
 
 # Read gene IDs from the uploaded file
 if gene_list is not None:
     gene_list_df = pd.read_csv(gene_list,sep="\t")
+    gene_id_list = gene_list_df[gene_id_name].tolist()
+else:
+    response = requests.get(github_file_url)
+    gene_list_df = pd.read_csv(StringIO(response.text),sep="\t")
     gene_id_list = gene_list_df[gene_id_name].tolist()
     
     # Loop through the GTF data
