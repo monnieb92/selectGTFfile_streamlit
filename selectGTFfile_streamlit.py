@@ -20,7 +20,7 @@ gtf_data = None
 def download_gtf_file(url):
     response = requests.get(url)
     if response.status_code == 200:
-        return response.text
+        return response.content
     else:
         return None
 
@@ -47,7 +47,8 @@ if gtf_url:
     if gtf_data:
         #Display the first 1000 characters of the file as an example
         st.write("First 1000 characters of the GTF file:")
-        st.text(gtf_data[:1000])
+        decoded_content =  gtf_data[:1000].decode('utf-8')
+        st.text(decoded_content)
     else:
         st.write("Failed to download the GTF file. Please check the URL.")
 else:
@@ -84,6 +85,6 @@ if gtf_data:
 
 # Create a button for downloading the selected GTF
 if st.button("Download Selected GTF"):
-    with open(downloadpath, "w") as new_gtf_file:
+    with open(downloadpath, "wb") as new_gtf_file:
         for entry in selected_genes:
             new_gtf_file.write(entry)
