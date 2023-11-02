@@ -75,8 +75,8 @@ if gtf_data:
         
     # Loop through the GTF data
     for line in gtf_lines:
-        #Decode the binary ;ome tp text using UTF-8
-        line_text=line.decode('utf-8')
+        #Decode the binary one tp text using UTF-8
+        line_text=line.decode('iso-8859-1')
         
         elements = line.split("\t")
         
