@@ -75,7 +75,11 @@ if gtf_data:
         
     # Loop through the GTF data
     for line in gtf_lines:
+        #Decode the binary ;ome tp text using UTF-8
+        line_text=line.decode('utf-8')
+        
         elements = line.split("\t")
+        
         if len(elements) < 9:
             continue
         attributes = elements[8]
