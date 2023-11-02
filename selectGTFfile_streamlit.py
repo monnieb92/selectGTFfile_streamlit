@@ -90,6 +90,6 @@ if gtf_data:
 
 # Create a button for downloading the selected GTF
 if st.button("Download Selected GTF"):
-    with open(downloadpath, "wb") as new_gtf_file:
+    with open(downloadpath, "w") as new_gtf_file:
         for entry in selected_genes:
             new_gtf_file.write(entry)
