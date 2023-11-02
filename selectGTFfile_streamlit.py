@@ -23,10 +23,10 @@ def download_gtf_file(url):
     response = requests.get(url, stream=True)
     if response.status_code == 200:
         if 'gzip' in response.headers.get('content-encoding', ''):
-            with gzip.GzipFile(fileobj=BytesIO(response.raw)) as f:
-                return f.read().decode('utf-8')
-        else: 
-            gtf_data=response.text
+            with gzip.GzipFile(fileobj=BytesIO(response.raw)) as file:
+                gtf_df = pd.read_csv(file, sep='\t', header=None, comment='#')
+                return gtf_df
+        
     else:
         return None
 
