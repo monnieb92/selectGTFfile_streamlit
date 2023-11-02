@@ -27,7 +27,7 @@ def download_gtf_file(url):
                 gtf_data = file.read()
                 return gtf_data
         else: 
-            return response.txt        
+            return response.text        
     else:
         return None
 
