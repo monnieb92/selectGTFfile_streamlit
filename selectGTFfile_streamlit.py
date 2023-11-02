@@ -51,7 +51,7 @@ if gtf_url:
     else:
         st.write("Failed to download the GTF file. Please check the URL.")
 else:
-st.write("Invalid GTF version selected.")
+    st.write("Invalid GTF version selected.")
 
 # Empty list
 selected_genes = []
