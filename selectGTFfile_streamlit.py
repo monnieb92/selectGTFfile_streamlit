@@ -10,6 +10,7 @@ import requests
 import pandas as pd
 from io import StringIO
 import gzip
+from io import BytesIO
 
 gene_list = st.file_uploader("Upload a tab delimited file of your selected gene list")
 gene_id_name = st.text_area("How you are aligning the files, by gene_id", value="gene_id")
@@ -21,10 +22,11 @@ gtf_data = None
 def download_gtf_file(url):
     response = requests.get(url, stream=True)
     if response.status_code == 200:
-        if response.headers.get('content-encoding') == 'gzip':
-            with gzip.GzipFile(fileobj=response.raw) as f:
+        if 'gzip' in response.headers.get('content-encoding', ''):
+            with gzip.GzipFile(fileobj=BytesIO(response.raw)) as f:
                 return f.read().decode('utf-8')
-        return response.text
+        else: 
+            gtf_data=response.text
     else:
         return None
 
