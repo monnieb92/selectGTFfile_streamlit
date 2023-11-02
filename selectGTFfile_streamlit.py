@@ -42,7 +42,8 @@ st.write("You selected:", selected_version)
 
 gtf_url = gtf_urls.get(selected_version)
 
-if gtf_url:gtf_data = download_gtf_file(gtf_url)
+if gtf_url:
+    gtf_data = download_gtf_file(gtf_url)
     if gtf_data:
         #Display the first 1000 characters of the file as an example
         st.write("First 1000 characters of the GTF file:")
