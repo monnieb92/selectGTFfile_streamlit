@@ -47,7 +47,7 @@ if gtf_url:
     if gtf_data:
         #Display the first 1000 characters of the file as an example
         st.write("First 1000 characters of the GTF file:")
-        decoded_content =  gtf_data[:1000].decode('utf-8')
+        decoded_content =  gtf_data[0:1000].decode('utf-8')
         st.text(decoded_content)
     else:
         st.write("Failed to download the GTF file. Please check the URL.")
