@@ -20,6 +20,8 @@ gtf_data = None
 def download_gtf_file(url):
     response = requests.get(url)
     if response.status_code == 200:
+        if response.headers.get('content-encoding') == 'gzip':
+            return gzip.decompress(response.content).decode('utf-8')
         return response.content
     else:
         return None
@@ -47,8 +49,7 @@ if gtf_url:
     if gtf_data:
         #Display the first 1000 characters of the file as an example
         st.write("First 1000 characters of the GTF file:")
-        decoded_content =  gtf_data.decode('utf-8')
-        st.text(decoded_content[:1000])
+        st.text(gtf_data[:1000])
     else:
         st.write("Failed to download the GTF file. Please check the URL.")
 else:
