@@ -48,6 +48,13 @@ st.write("You selected:", selected_version)
 
 gtf_url = gtf_urls.get(selected_version)
 
+if st.button("View GTF file"):
+    gtf_df =download_gtf_file(gtf_url)
+    if gtf_df is not None: 
+        st.write("First few rows of the GTF file:")
+        st.write(gtf_df.head())
+    else: 
+        st.write("Failed to download GTF file. FUCK.")
 if gtf_url:
     gtf_data = download_gtf_file(gtf_url)
     if gtf_data:
