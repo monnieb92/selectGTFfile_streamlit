@@ -5,7 +5,6 @@ Created on Fri Oct 27 14:16:50 2023
 
 @author: monicabomber
 """
-
 import streamlit as st
 import requests
 import pandas as pd
@@ -27,11 +26,12 @@ def download_gtf_file(url):
 
 
 # Dictionary mapping GTF versions to their respective URLs
+
 gtf_urls = {
     "hg38": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/genes/hg38.ncbiRefSeq.gtf.gz",
     "hg19": "https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/genes/hg19.ncbiRefSeq.gtf.gz",
     "mm10": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/genes/mm10.ncbiRefSeq.gtf.gz",
-    "mm39": "https://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/genes/mm39.ncbiRefSeq.gtf.gz",
+    "mm39": "https://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/genes/mm39.ncbiRefSeq.gtf.gz"
 }
 
 # Create a dropdown to select the GTF version
