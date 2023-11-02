@@ -19,10 +19,10 @@ gtf_data = None
 
 # Function to download GTF file from the selected URL
 def download_gtf_file(url):
-    response = requests.get(url)
+    response = requests.get(url, stream=True)
     if response.status_code == 200:
         if response.headers.get('content-encoding') == 'gzip':
-            with gzip.open(response.raw,'rb') as f:
+            with gzip.GzipFile(fileobj=response.raw) as f:
                 return f.read().decode('utf-8')
         return response.text
     else:
