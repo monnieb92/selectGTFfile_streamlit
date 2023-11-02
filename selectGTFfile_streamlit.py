@@ -74,7 +74,7 @@ if gtf_data:
     # Loop through the GTF data
     for line in gtf_lines:
         elements = line.split("\t")
-        if len elements < 9:
+        if len(elements) < 9:
             continue
         attributes = elements[8]
         if gene_id_name in attributes:
