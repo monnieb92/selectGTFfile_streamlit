@@ -77,10 +77,8 @@ if gtf_data:
         
     # Loop through the GTF data
     for line in gtf_lines:
-        #Decode the binary one tp text using UTF-8
-        line_text=line.decode('utf-8')
-        
-        elements = line_text.split("\t")
+
+        elements = line.split("\t")
         
         if len(elements) < 9:
             continue
@@ -88,7 +86,7 @@ if gtf_data:
         if gene_id_name in attributes:
             gene_id = attributes.split(gene_id_name)[1].split('";')[0].strip(' "')
             if gene_id in gene_id_list:
-                selected_genes.append(line_text)
+                selected_genes.append(line)
 
 st.write("Debug info:")
 st.write(f"Length of selected_genes: {len(selected_genes)}")
