@@ -87,6 +87,10 @@ if gtf_data:
             gene_id = attributes.split(gene_id_name)[1].split('";')[0].strip(' "')
             if gene_id in gene_id_list:
                 selected_genes.append(line_text)
+
+st.write("Debug info:")
+st.write(f"Length of selected_genes: {len(selected_genes)}")
+st.write(f"First entry in selected_genes: {selected_genes[0] if selected_genes else 'No entries'}")
 st.write("Contents of Selected Genes GTF file")
 if selected_genes:
     for entry in selected_genes:
