@@ -41,6 +41,7 @@ selected_version = st.selectbox("Select GTF Version", list(gtf_urls.keys()))
 st.write("You selected:", selected_version)
 
 gtf_url = gtf_urls.get(selected_version)
+
 if gtf_url:gtf_data = download_gtf_file(gtf_url)
     if gtf_data:
         #Display the first 1000 characters of the file as an example
@@ -49,7 +50,7 @@ if gtf_url:gtf_data = download_gtf_file(gtf_url)
     else:
         st.write("Failed to download the GTF file. Please check the URL.")
 else:
-    st.write("Invalid GTF version selected.")
+st.write("Invalid GTF version selected.")
 
 # Empty list
 selected_genes = []
