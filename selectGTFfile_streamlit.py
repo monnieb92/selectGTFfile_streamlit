@@ -19,7 +19,6 @@ gtf_data = None
 
 # Function to download GTF file from the selected URL
 def download_gtf_file(url):
-    response = requests.get(url)
     if response.status_code == 200:
         return response.text
     else:
