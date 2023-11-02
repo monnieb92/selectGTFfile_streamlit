@@ -87,6 +87,10 @@ if gtf_data:
             gene_id = attributes.split(gene_id_name)[1].split('";')[0].strip(' "')
             if gene_id in gene_id_list:
                 selected_genes.append(line_text)
+write("Contents of Selected Genes GTF file")
+if selected_genes:
+    for entry in selected_genes:
+        st.text(entry)
 
 # Create a button for downloading the selected GTF
 if st.button("Download Selected GTF"):
