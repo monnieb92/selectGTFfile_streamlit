@@ -9,6 +9,7 @@ import streamlit as st
 import requests
 import pandas as pd
 from io import StringIO
+import gzip
 
 gene_list = st.file_uploader("Upload a tab delimited file of your selected gene list")
 gene_id_name = st.text_area("How you are aligning the files, by gene_id", value="gene_id")
@@ -21,8 +22,9 @@ def download_gtf_file(url):
     response = requests.get(url)
     if response.status_code == 200:
         if response.headers.get('content-encoding') == 'gzip':
-            return gzip.decompress(response.content).decode('utf-8')
-        return response.content
+            with gzip.open(response.raw,'rb') as f:
+                return f.read().decode('utf-8')
+        return response.text
     else:
         return None
 
