@@ -23,7 +23,7 @@ def download_gtf_file(url):
     response = requests.get(url)
     if response.status_code == 200:
         if response.headers.get('content-encoding') == 'application/x-gzip':
-            with gzip.GzipFile(fileobj=StringIO(response.content.decode('utf-8')) as file:
+            with gzip.GzipFile(fileobj=StringIO(response.content.decode('utf-8'))) as file:
                 gtf_data = file.read()
                 return gtf_data
         else: 
