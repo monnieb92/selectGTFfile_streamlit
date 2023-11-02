@@ -78,7 +78,7 @@ if gtf_data:
         #Decode the binary one tp text using UTF-8
         line_text=line.decode('iso-8859-1')
         
-        elements = line.split("\t")
+        elements = line_text.split("\t")
         
         if len(elements) < 9:
             continue
