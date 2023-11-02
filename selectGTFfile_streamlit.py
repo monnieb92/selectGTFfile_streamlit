@@ -77,7 +77,6 @@ if gtf_data:
         
     # Loop through the GTF data
     for line in gtf_lines:
-
         elements = line.split("\t")
         
         if len(elements) < 9:
