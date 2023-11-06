@@ -7,7 +7,7 @@ Created on Fri Oct 27 14:16:50 2023
 """
 import streamlit as st
 import requests
-import pandas as pd
+import polars as pl
 import io
 import gzip
 from io import BytesIO
@@ -78,11 +78,11 @@ if gtf_data:
 
     # Read gene IDs from the uploaded file
     if gene_list is not None:
-        gene_list_df = pd.read_csv(gene_list, sep="\t")
+        gene_list_df = pl.read_csv(gene_list, sep="\t")
         gene_id_list = gene_list_df[gene_id_name].tolist()
     else:
         response = requests.get(github_file_url)
-        gene_list_df = pd.read_csv(StringIO(response.text), sep="\t")
+        gene_list_df = pl.read_csv(StringIO(response.text), sep="\t")
         gene_id_list = gene_list_df[gene_id_name].tolist()
         
     # Loop through the GTF data
