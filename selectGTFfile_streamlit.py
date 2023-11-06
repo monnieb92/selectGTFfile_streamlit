@@ -24,7 +24,7 @@ def download_gtf_file(url):
     if response.status_code == 200:
         if response.headers.get('content-encoding') == 'application/x-gzip':
             with gzip.GzipFile(fileobj=StringIO(response.content.decode('utf-8'))) as file:
-                gtf_data = file.read()
+                gtf_data = pd.read_csv(file)
                 return gtf_data
         else: 
             return response.text        
