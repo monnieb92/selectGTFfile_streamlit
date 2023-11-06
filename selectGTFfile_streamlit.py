@@ -82,7 +82,7 @@ if gtf_data:
         gene_id_list = gene_list_df[gene_id_name].tolist()
     else:
         response = requests.get(github_file_url)
-        gene_list_df = pl.read_csv(StringIO(response.text), sep="\t")
+        gene_list_df = pl.read_csv(StringIO(response.text), separator="\t")
         gene_id_list = gene_list_df[gene_id_name].tolist()
         
     # Loop through the GTF data
