@@ -102,7 +102,7 @@ st.write(f"Length of selected_genes: {len(selected_genes)}")
 st.write(f"First entry in selected_genes: {selected_genes[0] if selected_genes else 'No entries'}")
 st.write("Contents of Selected Genes GTF file")
 if selected_genes:
-    for entry in selected_genes:
+    for entry in selected_genes.head():
         st.text(entry)
 
 # Create a button for downloading the selected GTF
