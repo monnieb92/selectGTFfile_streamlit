@@ -8,7 +8,7 @@ Created on Fri Oct 27 14:16:50 2023
 import streamlit as st
 import requests
 import pandas as pd
-from io import StringIO
+import io
 import gzip
 from io import BytesIO
 
@@ -22,15 +22,14 @@ gtf_data = None
 def download_gtf_file(url):
     response = requests.get(url)
     if response.status_code == 200:
-        if response.headers.get('content-encoding') == 'gzip':
-            with gzip.GzipFile(fileobj=BytesIO(response.content)) as file:
-                gtf_data = file.read().decode('utf-8')
-                return gtf_data
+        if url.endswith(".gz"): 
+            with gzip.open(io.BytesIO(response.content),'rt',enconding='utf-8') as file: 
+                gtf_data= file.read()
         else: 
-            return response.text        
+            gtf_data= response.txt
+        return gtf_data
     else:
         return None
-
 
 # Dictionary mapping GTF versions to their respective URLs
 
