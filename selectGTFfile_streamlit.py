@@ -11,6 +11,7 @@ import pandas as pd
 import io
 import gzip
 from io import BytesIO
+from io import StringIO
 
 gene_list = st.file_uploader("Upload a tab delimited file of your selected gene list")
 gene_id_name = st.text_area("How you are aligning the files, by gene_id", value="gene_id")
