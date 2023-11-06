@@ -103,7 +103,7 @@ st.write(f"First entry in selected_genes: {selected_genes[0] if selected_genes e
 st.write("Contents of Selected Genes GTF file")
 if selected_genes:
     for entry in selected_genes:
-        st.text(entry[:1000])
+        st.text(entry[:50])
 
 # Create a button for downloading the selected GTF
 if st.button("Download Selected GTF"):
