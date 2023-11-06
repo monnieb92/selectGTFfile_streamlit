@@ -78,11 +78,11 @@ if gtf_data:
 
     # Read gene IDs from the uploaded file
     if gene_list is not None:
-        gene_list_df = pl.read_csv(gene_list, separator="\t")
+        gene_list_df = pl.read_csv(StringIO(gene_list.getvalue()))
         gene_id_list = gene_list_df[gene_id_name].tolist()
     else:
         response = requests.get(github_file_url)
-        gene_list_df = pl.read_csv(StringIO(response.text), separator="\t")
+        gene_list_df = pl.read_csv(StringIO(response.text))
         gene_id_list = gene_list_df[gene_id_name].tolist()
         
     # Loop through the GTF data
