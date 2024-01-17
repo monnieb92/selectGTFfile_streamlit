@@ -1,3 +1,4 @@
 requests==2.26.0
-streamlit==1.23.1
+streamlit==1.30.0
 polars==0.19.12
+pandas=2.1.4
