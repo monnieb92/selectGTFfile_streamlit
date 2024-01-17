@@ -23,13 +23,13 @@ gtf_data = None
 def download_gtf_file(url):
     response = requests.get(url)
     if response.status_code == 200:
-        if response.headers.get('content-encoding') == 'gzip':
-            with gzip.GzipFile(fileobj=BytesIO(response.content)) as file:
-                gtf_data = file.read().decode('utf-8')
+        if url.endswith("gz"):
+            with gzip.open(io.BytesIO(response.content),'rt',encoding ='utf-8') as file:
+                gtf_data = file.read()
                 return gtf_data
         else:
             gtf_data = response.text
-        return gtf_data
+        return gtf_data.splitlines()
     else:
         return None
 
@@ -51,8 +51,9 @@ st.write("You selected:", selected_version)
 gtf_url = gtf_urls.get(selected_version)
 
 if st.button("View GTF file"):
-    gtf_df = pd.read_csv(StringIO(download_gtf_file(gtf_url)), sep='\t')
-    if gtf_df is not None:
+    gtf_lines = download_gtf_file(gtf_url)
+    if gtf_lines:
+        gtf_df = pd.Dataframe([line.split('\t') for line in gtf_lines], columns=["seqname","source","feature","start","ends","score","strand","frame","attribute"])
         st.write("First few rows of the GTF file:")
         st.write(gtf_df.head())
     else:
