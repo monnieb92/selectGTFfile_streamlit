@@ -55,7 +55,7 @@ if st.button("View GTF file"):
         st.write("First few rows of the GTF file:")
         st.write(gtf_df.head())
     else:
-        st.write("Failed to download GTF file. FUCK.")
+        st.write("Failed to download GTF file.")
 if gtf_url:
     gtf_data = download_gtf_file(gtf_url)
     if gtf_data:
