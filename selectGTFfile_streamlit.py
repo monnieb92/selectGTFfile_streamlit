@@ -23,9 +23,10 @@ gtf_data = None
 def download_gtf_file(url):
     response = requests.get(url)
     if response.status_code == 200:
-        if url.endswith(".gz"):
-            with gzip.open(io.BytesIO(response.content), 'rt', encoding='utf-8') as file:
-                gtf_data = file.read()
+        if response.headers.get('content-encoding') == 'gzip':
+            with gzip.GzipFile(fileobj=BytesIO(response.content)) as file:
+                gtf_data = file.read().decode('utf-8')
+                return gtf_data
         else:
             gtf_data = response.text
         return gtf_data
