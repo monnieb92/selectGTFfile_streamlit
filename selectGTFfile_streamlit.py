@@ -28,7 +28,7 @@ def download_gtf_file(url):
                 gtf_data= file.read()
         else: 
             gtf_data= response.txt
-                return gtf_data
+            return gtf_data
         else:
             gtf_data = response.text
         return gtf_data.splitlines()
@@ -38,7 +38,7 @@ def download_gtf_file(url):
 # Dictionary mapping GTF versions to their respective URLs
 
 gtf_urls = {
-        "hg38": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/genes/hg38.ncbiRefSeq.gtf.gz",
+    "hg38": "https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/genes/hg38.ncbiRefSeq.gtf.gz",
     "hg19": "https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/genes/hg19.ncbiRefSeq.gtf.gz",
     "mm10": "https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/genes/mm10.ncbiRefSeq.gtf.gz",
     "mm39": "https://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/genes/mm39.ncbiRefSeq.gtf.gz"
@@ -81,11 +81,11 @@ if gtf_data:
 
     # Read gene IDs from the uploaded file
     if gene_list is not None:
-        gene_list_df = pd.read_csv(StringIO(gene_list.getvalue()), sep='\t')
+        gene_list_df = pd.read_csv(StringIO(gene_list.getvalue()))
         gene_id_list = gene_list_df[gene_id_name].tolist()
     else:
         response = requests.get(github_file_url)
-        gene_list_df = pd.read_csv(StringIO(response.text), sep='\t')
+        gene_list_df = pd.read_csv(StringIO(response.text))
         gene_id_list = gene_list_df[gene_id_name].tolist()
 
     # Loop through the GTF data
